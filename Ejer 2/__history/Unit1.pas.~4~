@@ -1,0 +1,48 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    Memo1: TMemo;
+    BEliminarESP: TButton;
+    MFrase: TMemo;
+    procedure BEliminarESPClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.BEliminarESPClick(Sender: TObject);
+Var Texto, TextoN: string;
+  Posicion: Integer;
+begin
+  Texto := MFrase.Lines.Text;
+
+  while length(Texto) <> 0 do
+    begin
+      Posicion := Pos(' ', Texto);
+
+      if Posicion = 0 then
+        Posicion := length(Texto) + 1;
+
+      TextoN := TextoN + copy(Texto, 1, Posicion - 1);
+      Texto := copy(Texto, Posicion + 1, length(texto));
+    end;
+
+   memo1.Lines.Add(TextoN);
+end;
+
+end.

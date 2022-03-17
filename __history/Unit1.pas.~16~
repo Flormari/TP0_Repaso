@@ -1,0 +1,137 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TVector = array[1..9] of Integer;
+  TForm1 = class(TForm)
+    Memo1: TMemo;
+    BGeVector: TButton;
+    BMedia: TButton;
+    BMediana: TButton;
+    BModa: TButton;
+    BMinimo: TButton;
+    BMaximo: TButton;
+    procedure BGeVectorClick(Sender: TObject);
+    procedure BMediaClick(Sender: TObject);
+    procedure BMedianaClick(Sender: TObject);
+    procedure BModaClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  Vector: TVector;
+
+implementation
+
+{$R *.dfm}
+
+procedure burbuja();
+var
+  Intercambio: Boolean;
+  I: Integer;
+  Swap: integer;
+begin
+  Intercambio := True;
+  while Intercambio do
+  begin
+    Intercambio := False;
+    for I := 2 to 9 do
+    begin
+      if Vector[I - 1] > Vector[I] then
+       begin
+         Swap := Vector [I - 1];
+         Vector [I - 1] := Vector [I];
+         Vector [I] := Swap;
+         Intercambio := True;
+       end;
+    end;
+  end;
+
+
+end;
+
+
+// GENERAR VECTOR ------------------------
+procedure TForm1.BGeVectorClick(Sender: TObject);
+var
+  I: Integer;
+begin
+  Randomize;
+  for I := 1 to 9 do
+  begin
+    Vector[I] := Random(10);
+  end;
+
+  burbuja();
+
+  {for I := 1 to 9 do
+    memo1.Lines.Add(Vector[I].ToString);  }
+
+  Memo1.Clear;
+  Memo1.Lines.Add('Vector Creado!!')
+end;
+
+// MEDIA ----------------------------
+procedure TForm1.BMediaClick(Sender: TObject);
+var
+  Prom: Integer;
+  I: Integer;
+begin
+  Prom := 0;
+  for I := 1 to 9 do
+    Prom := Prom + Vector [I];
+
+  memo1.Lines.Add('Media: ' + (Prom/9).ToString)
+end;
+
+
+// MEDIANA -----------------------------------
+procedure TForm1.BMedianaClick(Sender: TObject);
+var
+  Mediana: Integer;
+begin
+  Mediana := 9 div 2;
+  memo1.Lines.Add('Mediana: ' + Vector[Mediana].ToString)
+end;
+
+
+
+
+// DESPUES ------------------------
+procedure TForm1.BModaClick(Sender: TObject);
+var
+  Moda, Total, Cont: Integer;
+  I: Integer;
+begin
+  Total := 0;
+  Cont := 1;
+  Moda := Vector[1];
+  for I := 2 to 9 do
+    begin
+      if Vector [I] = Moda then
+        Cont := Cont + 1
+      else
+       if Total < Cont then
+          begin
+          Total := Cont ;
+          Moda := Vector[I - 1];
+          Cont := 1;
+          end;
+    end;
+
+    if Total < Cont then
+      Moda := Vector[9];
+
+  memo1.Lines.Add('Meda: ' + IntToStr(Moda));
+end;
+
+end.
