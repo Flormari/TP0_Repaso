@@ -1,0 +1,66 @@
+unit CorteControl;
+
+interface
+
+  uses
+    System.SysUtils;
+
+  Type
+
+  Facturacion = Record
+    NroDeFactura: Integer;
+    Fecha: TDate;
+    Importe: Integer;
+  end;
+
+  VectorFactura = Array [1..5] of Facturacion;
+
+
+Function SplitParte (Texto, Separador: String; Posicion: Integer): Integer;
+
+procedure SplitRegistro(Texto, Separador: String; Registro: Facturacion);
+
+implementation
+
+ //------------------------------------------------------------
+ //FUNCIONES
+ //------------------------------------------------------------
+
+Function SplitParte (Texto, Separador: String; Posicion: Integer): Integer;
+begin
+  Texto := copy(Texto, Posicion + 1, Length(Texto));
+
+  Posicion := Pos(Separador, Texto);
+end;
+
+
+ //------------------------------------------------------------
+ //PROCEDIMIENTOS
+ //------------------------------------------------------------
+
+procedure SplitRegistro(Texto, Separador: String; Registro: Facturacion);
+var Posicion: Integer;
+begin
+  //NroDeFacturacion ; Fecha ; Importe
+
+  Texto := Texto + Separador;
+
+  Posicion := Pos(Separador, Texto);
+
+  //Primer
+  Registro.NroDeFactura := StrToInt(copy(Texto, 1, Posicion - 1));
+  Posicion := SplitParte(Texto, Separador, Posicion);
+
+
+  //Segundo
+  Registro.Fecha := StrToDate(copy(Texto, 1, Posicion - 1));
+  Posicion := SplitParte(Texto, Separador, Posicion);
+
+
+  //Tercero
+  Registro.Importe := StrToInt(copy(Texto, 1, Posicion - 1));
+
+end;
+
+
+end.

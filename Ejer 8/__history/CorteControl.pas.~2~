@@ -1,0 +1,23 @@
+unit CorteControl;
+
+interface
+
+  Type
+
+  Facturacion = Record
+    NroDeFactura: Integer;
+    Fecha: TDate;
+    Importe: Integer;
+  end;
+
+procedure SplitRegistro(Texto, Separador: String; Registro: Facturacion);
+
+implementation
+
+procedure SplitRegistro(Texto, Separador: String; Registro: Facturacion);
+begin
+
+end;
+
+
+end.
