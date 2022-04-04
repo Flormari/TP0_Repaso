@@ -1,0 +1,49 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, TadRecursion;
+
+type
+  TForm1 = class(TForm)
+    EdNumero: TEdit;
+    EdBomba: TEdit;
+    TNumero: TLabel;
+    TBomba: TLabel;
+    Ejecutar: TButton;
+    Memo1: TMemo;
+    procedure EjecutarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.EjecutarClick(Sender: TObject);
+Var Num, Bomb, Indice, I: Integer;
+  R: Recursion;
+  Lista, ListaNueva: ListaTerminada;
+begin
+  Num := strtoint(EdNumero.Text);
+  Bomb := strtoint(EdBomba.Text);
+  Indice := 1;
+
+  ListaNueva := R.Bomba(Num, Bomb, Indice, lista);
+
+  for I := 1 to Indice do begin
+    memo1.Lines.Add(ListaNueva[I].ToString);
+  end;
+
+
+end;
+
+end.

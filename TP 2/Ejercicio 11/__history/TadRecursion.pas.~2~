@@ -1,0 +1,24 @@
+unit TadRecursion;
+
+interface
+
+  Uses
+    System.SysUtils, Winapi.Windows;
+
+  Type
+
+    ListaTerminada = Array [1..30] of String;
+
+    Recursion = Object
+      function Bomba (N, B, Ind: Integer; Lista: ListaTerminada): ListaTerminada;
+    End;
+
+implementation
+
+
+function Recursion.Bomba (N, B, Ind: Integer; Lista: ListaTerminada): ListaTerminada;
+begin
+
+end;
+
+end.
